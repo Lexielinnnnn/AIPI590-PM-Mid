@@ -1,3 +1,17 @@
 # Validation
 
-Live API returned 23 requests and passed before/after count checks. Five focused unit tests passed (scope/status handling, empty results, duplicate IDs, invalid citations, query escaping). Offline replay exactly reproduced evidence.json. Category and status totals both equal 15. Sample narrative and all question links were manually checked against the saved records. External LLM API call, model quality, token usage and cost remain untested.
+Validated on October 14, 2026.
+
+- Live retrieval returned 23 exact-address 311 requests, 56 HPD violations in the date window, and 35 raw bedbug filing rows for the resolved BBL.
+- Before/after source counts matched for all three APIs.
+- The bedbug preparation step retained 34 active building-period filings after applying the dataset's superseding-filing rule.
+- Nine focused unit tests passed.
+- Offline replay produced byte-identical `evidence.json`, `data_report.md`, and `report.html` files.
+- Aggregate reconciliation checks passed: 15 eligible 311 records = 12 closed + 3 open; 56 HPD violations = 9 closed + 47 open; HPD classes = 34 B + 15 C + 7 A.
+- Source links are retained in the bounded evidence package.
+
+Not validated:
+
+- No external LLM request was made, so model quality, latency, usage, and cost remain unmeasured.
+- No customer interviews or usability sessions are documented.
+- BBL-to-building identity was not independently confirmed; the sample BBL covers multiple records and likely multiple buildings or entrances.
