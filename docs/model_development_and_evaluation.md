@@ -32,13 +32,13 @@ The primary ranking metric is precision-recall AUC because the positive class is
 
 | Test metric | XGBoost | Logistic regression |
 |---|---:|---:|
-| PR-AUC | 0.8987 | 0.9163 |
-| ROC-AUC | 0.8453 | 0.8568 |
-| Accuracy | 0.8208 | 0.7872 |
-| Precision | 0.8294 | 0.7731 |
-| Recall | 0.9209 | 0.9640 |
-| F1 | 0.8727 | 0.8581 |
-| Brier score | 0.1465 | 0.1564 |
+| PR-AUC | 0.8971 | 0.9163 |
+| ROC-AUC | 0.8428 | 0.8568 |
+| Accuracy | 0.8160 | 0.7872 |
+| Precision | 0.8254 | 0.7731 |
+| Recall | 0.9185 | 0.9640 |
+| F1 | 0.8695 | 0.8581 |
+| Brier score | 0.1456 | 0.1564 |
 | Recall at top 10% | 0.1439 | 0.1511 |
 
 XGBoost improved accuracy, precision, F1, and Brier score. Logistic regression produced better PR-AUC, ROC-AUC, recall, and recall at the top 10%. The evidence does not justify declaring XGBoost the final winner. The next experiment should broaden the sampling frame, tune both models, calibrate probabilities on a held-out period, and select the model using the product's review-capacity tradeoff.

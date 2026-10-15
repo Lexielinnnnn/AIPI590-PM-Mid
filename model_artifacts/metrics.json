@@ -1,64 +1,64 @@
 {
   "calibration_bins_xgboost_test": [
     {
-      "mean_predicted_probability": 0.038569506257772446,
-      "observed_positive_rate": 0.14423076923076922,
+      "mean_predicted_probability": 0.03777248039841652,
+      "observed_positive_rate": 0.1553398058252427,
       "probability_interval": "(-0.001, 0.1]",
-      "rows": 104
+      "rows": 103
     },
     {
-      "mean_predicted_probability": 0.14666858315467834,
-      "observed_positive_rate": 0.20833333333333334,
+      "mean_predicted_probability": 0.14239361882209778,
+      "observed_positive_rate": 0.13636363636363635,
       "probability_interval": "(0.1, 0.2]",
-      "rows": 24
+      "rows": 22
     },
     {
-      "mean_predicted_probability": 0.26281437277793884,
-      "observed_positive_rate": 0.38095238095238093,
+      "mean_predicted_probability": 0.24454635381698608,
+      "observed_positive_rate": 0.4090909090909091,
       "probability_interval": "(0.2, 0.3]",
-      "rows": 21
+      "rows": 22
     },
     {
-      "mean_predicted_probability": 0.34200409054756165,
-      "observed_positive_rate": 0.52,
+      "mean_predicted_probability": 0.3559122085571289,
+      "observed_positive_rate": 0.4,
       "probability_interval": "(0.3, 0.4]",
       "rows": 25
     },
     {
-      "mean_predicted_probability": 0.4541833996772766,
-      "observed_positive_rate": 0.68,
+      "mean_predicted_probability": 0.4561426043510437,
+      "observed_positive_rate": 0.6521739130434783,
       "probability_interval": "(0.4, 0.5]",
-      "rows": 25
+      "rows": 23
     },
     {
-      "mean_predicted_probability": 0.5505781173706055,
-      "observed_positive_rate": 0.6428571428571429,
+      "mean_predicted_probability": 0.5505557060241699,
+      "observed_positive_rate": 0.7575757575757576,
       "probability_interval": "(0.5, 0.6]",
-      "rows": 28
+      "rows": 33
     },
     {
-      "mean_predicted_probability": 0.6579402089118958,
-      "observed_positive_rate": 0.8085106382978723,
+      "mean_predicted_probability": 0.6566476225852966,
+      "observed_positive_rate": 0.7857142857142857,
       "probability_interval": "(0.6, 0.7]",
-      "rows": 47
+      "rows": 42
     },
     {
-      "mean_predicted_probability": 0.7537692785263062,
-      "observed_positive_rate": 0.7027027027027027,
+      "mean_predicted_probability": 0.7548514008522034,
+      "observed_positive_rate": 0.7333333333333333,
       "probability_interval": "(0.7, 0.8]",
-      "rows": 74
+      "rows": 75
     },
     {
-      "mean_predicted_probability": 0.8581360578536987,
-      "observed_positive_rate": 0.8673469387755102,
+      "mean_predicted_probability": 0.8538727164268494,
+      "observed_positive_rate": 0.8557692307692307,
       "probability_interval": "(0.8, 0.9]",
-      "rows": 98
+      "rows": 104
     },
     {
-      "mean_predicted_probability": 0.9527630805969238,
-      "observed_positive_rate": 0.9273743016759777,
+      "mean_predicted_probability": 0.9519941210746765,
+      "observed_positive_rate": 0.9204545454545454,
       "probability_interval": "(0.9, 1.0]",
-      "rows": 179
+      "rows": 176
     }
   ],
   "feature_columns": [
@@ -81,7 +81,7 @@
     "borough_queens",
     "borough_staten_island"
   ],
-  "generated_at_utc": "2026-10-15T00:33:42.724821+00:00",
+  "generated_at_utc": "2026-10-15T15:31:16.743565+00:00",
   "interpretation": "Preliminary results on an activity-stratified HPD sample; not a citywide performance estimate.",
   "model_selection_status": "open; XGBoost and logistic regression lead on different test metrics",
   "models": {
@@ -137,52 +137,52 @@
     },
     "xgboost": {
       "test": {
-        "accuracy": 0.8208,
-        "brier": 0.14645788073539734,
+        "accuracy": 0.816,
+        "brier": 0.1455846130847931,
         "confusion_matrix_tn_fp_fn_tp": [
           [
-            129,
-            79
+            127,
+            81
           ],
           [
-            33,
-            384
+            34,
+            383
           ]
         ],
-        "f1": 0.8727272727272727,
+        "f1": 0.8694665153234961,
         "positives": 417,
-        "pr_auc": 0.8987345432879366,
-        "precision": 0.8293736501079914,
+        "pr_auc": 0.8970751622447051,
+        "precision": 0.8254310344827587,
         "prevalence": 0.6672,
-        "recall": 0.920863309352518,
+        "recall": 0.9184652278177458,
         "recall_at_top_10_percent": 0.14388489208633093,
-        "roc_auc": 0.8453237410071943,
+        "roc_auc": 0.8427527209002029,
         "rows": 625,
-        "threshold": 0.33999999999999997
+        "threshold": 0.35999999999999993
       },
       "validation": {
-        "accuracy": 0.778,
-        "brier": 0.15453536808490753,
+        "accuracy": 0.796,
+        "brier": 0.151616632938385,
         "confusion_matrix_tn_fp_fn_tp": [
           [
-            94,
-            88
+            102,
+            80
           ],
           [
-            23,
-            295
+            22,
+            296
           ]
         ],
-        "f1": 0.8416547788873039,
+        "f1": 0.8530259365994236,
         "positives": 318,
-        "pr_auc": 0.8935715479186551,
-        "precision": 0.7702349869451697,
+        "pr_auc": 0.8946325171190219,
+        "precision": 0.7872340425531915,
         "prevalence": 0.636,
-        "recall": 0.9276729559748428,
+        "recall": 0.9308176100628931,
         "recall_at_top_10_percent": 0.1509433962264151,
-        "roc_auc": 0.8430610270232912,
+        "roc_auc": 0.8464130209413228,
         "rows": 500,
-        "threshold": 0.33999999999999997
+        "threshold": 0.35999999999999993
       }
     }
   },
@@ -191,10 +191,10 @@
   "schema_version": 1,
   "software": {
     "numpy": "2.3.5",
-    "pandas": "2.2.3",
+    "pandas": "2.3.3",
     "python": "3.12.14",
     "scikit_learn": "1.9.1",
-    "xgboost": "3.4.1"
+    "xgboost": "3.2.0"
   },
   "split": {
     "test": {

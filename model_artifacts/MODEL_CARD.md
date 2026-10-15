@@ -14,26 +14,26 @@ Prepared-data SHA-256: `8af00a84c9a1af5b0cf899cf92bd6c5d491944d6249fa41f778d6ef5
 
 | Metric | XGBoost | Logistic regression baseline |
 |---|---:|---:|
-| PR-AUC | 0.8987 | 0.9163 |
-| ROC-AUC | 0.8453 | 0.8568 |
-| F1 | 0.8727 | 0.8581 |
-| Precision | 0.8294 | 0.7731 |
-| Recall | 0.9209 | 0.9640 |
-| Brier score | 0.1465 | 0.1564 |
+| PR-AUC | 0.8971 | 0.9163 |
+| ROC-AUC | 0.8428 | 0.8568 |
+| F1 | 0.8695 | 0.8581 |
+| Precision | 0.8254 | 0.7731 |
+| Recall | 0.9185 | 0.9640 |
+| Brier score | 0.1456 | 0.1564 |
 | Recall at top 10% | 0.1439 | 0.1511 |
 
 These are preliminary results from an activity-stratified sample of buildings with HPD history. They do not estimate performance for every NYC rental building.
 
 ## Highest-importance features
 
-- `borough_staten_island`: 0.1548
-- `hpd_class_c_365d`: 0.1202
-- `borough_bronx`: 0.0900
-- `complaints_30d`: 0.0776
-- `hpd_total_365d`: 0.0706
-- `borough_queens`: 0.0689
-- `borough_manhattan`: 0.0485
-- `complaints_90d`: 0.0454
+- `borough_staten_island`: 0.1708
+- `hpd_class_c_365d`: 0.1351
+- `borough_bronx`: 0.0925
+- `complaints_30d`: 0.0704
+- `borough_queens`: 0.0598
+- `complaints_365d`: 0.0490
+- `borough_manhattan`: 0.0452
+- `hpd_total_365d`: 0.0430
 
 ## Known limitations
 

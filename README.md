@@ -95,7 +95,7 @@ python ml_pipeline.py all \
   --candidate-pool 1000
 ```
 
-The committed preliminary run contains 125 BBLs and 2,750 monthly observations. On the chronological test period, XGBoost reached 0.8987 PR-AUC, 0.8727 F1, and 0.1465 Brier score. The logistic baseline reached a higher 0.9163 PR-AUC and 0.9640 recall, so model selection remains open. See `docs/model_development_and_evaluation.md` and `model_artifacts/MODEL_CARD.md` for the full comparison and limitations.
+The committed preliminary run contains 125 BBLs and 2,750 monthly observations. On the chronological test period, XGBoost reached 0.8971 PR-AUC, 0.8695 F1, and 0.1456 Brier score. The logistic baseline reached a higher 0.9163 PR-AUC and 0.9640 recall, so model selection remains open. See `docs/model_development_and_evaluation.md` and `model_artifacts/MODEL_CARD.md` for the full comparison and limitations.
 
 Score a precomputed feature object with the saved native XGBoost model:
 
