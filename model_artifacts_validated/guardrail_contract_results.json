@@ -1,0 +1,164 @@
+{
+  "evaluation_type": "offline schema/citation contract checks, not external LLM evaluation",
+  "total": 25,
+  "passed": 25,
+  "cases": [
+    {
+      "case": "unknown-summary-id-0",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-summary-id-1",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-summary-id-2",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-summary-id-3",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-summary-id-4",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-question-id-0",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-question-id-1",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-question-id-2",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-question-id-3",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "unknown-question-id-4",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "blank-summary-''",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "blank-summary-' '",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "blank-summary-'\\n'",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "blank-viewing_questions-''",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "blank-viewing_questions-' '",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "blank-viewing_questions-'\\n'",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "missing-citation-summary",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "missing-citation-viewing_questions",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "aggregate-question-aggregate:311",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "aggregate-question-aggregate:hpd",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "aggregate-question-aggregate:bedbug",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true
+    },
+    {
+      "case": "valid-citation-311:70733609",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true
+    },
+    {
+      "case": "valid-citation-311:70729833",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true
+    },
+    {
+      "case": "valid-citation-311:70645581",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true
+    },
+    {
+      "case": "valid-citation-311:70566566",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true
+    }
+  ],
+  "not_evaluated": [
+    "claim entailment",
+    "prompt-injection resistance of a model",
+    "usefulness to renters",
+    "latency",
+    "actual token usage and cost"
+  ]
+}

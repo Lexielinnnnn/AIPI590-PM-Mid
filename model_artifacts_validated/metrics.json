@@ -1,0 +1,220 @@
+{
+  "calibration_bins_xgboost_test": [
+    {
+      "mean_predicted_probability": 0.03468450903892517,
+      "observed_positive_rate": 0.14285714285714285,
+      "probability_interval": "(-0.001, 0.1]",
+      "rows": 105
+    },
+    {
+      "mean_predicted_probability": 0.14851275086402893,
+      "observed_positive_rate": 0.3448275862068966,
+      "probability_interval": "(0.1, 0.2]",
+      "rows": 29
+    },
+    {
+      "mean_predicted_probability": 0.25273215770721436,
+      "observed_positive_rate": 0.5789473684210527,
+      "probability_interval": "(0.2, 0.3]",
+      "rows": 19
+    },
+    {
+      "mean_predicted_probability": 0.3510133624076843,
+      "observed_positive_rate": 0.36,
+      "probability_interval": "(0.3, 0.4]",
+      "rows": 25
+    },
+    {
+      "mean_predicted_probability": 0.4581872522830963,
+      "observed_positive_rate": 0.5357142857142857,
+      "probability_interval": "(0.4, 0.5]",
+      "rows": 28
+    },
+    {
+      "mean_predicted_probability": 0.5614330172538757,
+      "observed_positive_rate": 0.7333333333333333,
+      "probability_interval": "(0.5, 0.6]",
+      "rows": 30
+    },
+    {
+      "mean_predicted_probability": 0.6561200022697449,
+      "observed_positive_rate": 0.7333333333333333,
+      "probability_interval": "(0.6, 0.7]",
+      "rows": 45
+    },
+    {
+      "mean_predicted_probability": 0.7592543959617615,
+      "observed_positive_rate": 0.8275862068965517,
+      "probability_interval": "(0.7, 0.8]",
+      "rows": 58
+    },
+    {
+      "mean_predicted_probability": 0.8531197309494019,
+      "observed_positive_rate": 0.8151260504201681,
+      "probability_interval": "(0.8, 0.9]",
+      "rows": 119
+    },
+    {
+      "mean_predicted_probability": 0.9486454725265503,
+      "observed_positive_rate": 0.9401197604790419,
+      "probability_interval": "(0.9, 1.0]",
+      "rows": 167
+    }
+  ],
+  "feature_columns": [
+    "complaints_30d",
+    "complaints_90d",
+    "complaints_365d",
+    "hpd_total_90d",
+    "hpd_class_a_90d",
+    "hpd_class_b_90d",
+    "hpd_class_c_90d",
+    "hpd_total_365d",
+    "hpd_class_c_365d",
+    "days_since_class_c",
+    "bedbug_infested_rate",
+    "bedbug_rate_missing",
+    "month",
+    "borough_manhattan",
+    "borough_bronx",
+    "borough_brooklyn",
+    "borough_queens",
+    "borough_staten_island"
+  ],
+  "generated_at_utc": "2026-10-15T00:55:03.385890+00:00",
+  "interpretation": "Preliminary results on an activity-stratified HPD sample; not a citywide performance estimate.",
+  "label_horizon_days": 90,
+  "model_selection_status": "open; XGBoost and logistic regression lead on different test metrics",
+  "models": {
+    "logistic_regression": {
+      "test": {
+        "accuracy": 0.7856,
+        "brier": 0.15223047866682765,
+        "confusion_matrix_tn_fp_fn_tp": [
+          [
+            86,
+            122
+          ],
+          [
+            12,
+            405
+          ]
+        ],
+        "f1": 0.8580508474576272,
+        "positives": 417,
+        "pr_auc": 0.9174648729064279,
+        "precision": 0.7685009487666035,
+        "prevalence": 0.6672,
+        "recall": 0.9712230215827338,
+        "recall_at_top_10_percent": 0.1510791366906475,
+        "roc_auc": 0.8595104685482383,
+        "rows": 625,
+        "threshold": 0.16999999999999998
+      },
+      "validation": {
+        "accuracy": 0.78,
+        "brier": 0.15199528296186454,
+        "confusion_matrix_tn_fp_fn_tp": [
+          [
+            41,
+            50
+          ],
+          [
+            5,
+            154
+          ]
+        ],
+        "f1": 0.8484848484848485,
+        "positives": 159,
+        "pr_auc": 0.8922220579418968,
+        "precision": 0.7549019607843137,
+        "prevalence": 0.636,
+        "recall": 0.9685534591194969,
+        "recall_at_top_10_percent": 0.14465408805031446,
+        "roc_auc": 0.8513373419033797,
+        "rows": 250,
+        "threshold": 0.16999999999999998
+      }
+    },
+    "xgboost": {
+      "test": {
+        "accuracy": 0.8016,
+        "brier": 0.1484803706407547,
+        "confusion_matrix_tn_fp_fn_tp": [
+          [
+            134,
+            74
+          ],
+          [
+            50,
+            367
+          ]
+        ],
+        "f1": 0.8554778554778555,
+        "positives": 417,
+        "pr_auc": 0.8987572772263064,
+        "precision": 0.8321995464852607,
+        "prevalence": 0.6672,
+        "recall": 0.8800959232613909,
+        "recall_at_top_10_percent": 0.14388489208633093,
+        "roc_auc": 0.8453006825308982,
+        "rows": 625,
+        "threshold": 0.43999999999999995
+      },
+      "validation": {
+        "accuracy": 0.788,
+        "brier": 0.16365040838718414,
+        "confusion_matrix_tn_fp_fn_tp": [
+          [
+            54,
+            37
+          ],
+          [
+            16,
+            143
+          ]
+        ],
+        "f1": 0.8436578171091446,
+        "positives": 159,
+        "pr_auc": 0.8920000115761553,
+        "precision": 0.7944444444444444,
+        "prevalence": 0.636,
+        "recall": 0.89937106918239,
+        "recall_at_top_10_percent": 0.15723270440251572,
+        "roc_auc": 0.8330914368650217,
+        "rows": 250,
+        "threshold": 0.43999999999999995
+      }
+    }
+  },
+  "prepared_data_sha256": "924e47daea25fcecbeb06fa155a36a2e2c156bb1cc8169386247542669dff4a4",
+  "random_seed": 42,
+  "schema_version": 1,
+  "software": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.1",
+    "python": "3.12.14",
+    "scikit_learn": "1.9.1",
+    "xgboost": "3.4.1"
+  },
+  "split": {
+    "test": {
+      "end": "2025-10-01",
+      "rows": 625,
+      "start": "2025-06-01"
+    },
+    "train": {
+      "end": "2024-11-01",
+      "rows": 1375,
+      "start": "2024-01-01"
+    },
+    "validation": {
+      "end": "2025-03-01",
+      "rows": 250,
+      "start": "2025-02-01"
+    }
+  },
+  "split_policy": "Purge rows whose 90-day labels cross the next split. Full-window cohort selection bias remains.",
+  "target": "future_class_c_90d",
+  "target_definition": "New Class C HPD violation recorded in the next 90 days"
+}

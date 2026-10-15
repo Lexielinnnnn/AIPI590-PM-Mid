@@ -1,0 +1,26 @@
+{
+  "boundary": "Follow-up prioritization only; not a safety score or lease recommendation.",
+  "feature_columns": [
+    "complaints_30d",
+    "complaints_90d",
+    "complaints_365d",
+    "hpd_total_90d",
+    "hpd_class_a_90d",
+    "hpd_class_b_90d",
+    "hpd_class_c_90d",
+    "hpd_total_365d",
+    "hpd_class_c_365d",
+    "days_since_class_c",
+    "bedbug_infested_rate",
+    "bedbug_rate_missing",
+    "month",
+    "borough_manhattan",
+    "borough_bronx",
+    "borough_brooklyn",
+    "borough_queens",
+    "borough_staten_island"
+  ],
+  "target": "future_class_c_90d",
+  "target_horizon_days": 90,
+  "threshold": 0.43999999999999995
+}

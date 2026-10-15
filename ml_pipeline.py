@@ -451,6 +451,17 @@ def calibration_bins(y_true, probabilities, bins: int = 10):
     return result
 
 
+def purged_splits(data, train_months, validation_months, test_months):
+    """Keep every earlier split's full target window before the next split."""
+    _, pd = _imports()
+    label_end = data["observation_date"] + pd.Timedelta(days=90)
+    return {
+        "train": data[data["observation_date"].isin(train_months) & (label_end <= min(validation_months))],
+        "validation": data[data["observation_date"].isin(validation_months) & (label_end <= min(test_months))],
+        "test": data[data["observation_date"].isin(test_months)],
+    }
+
+
 def train(prepared_path: pathlib.Path, artifact_dir: pathlib.Path):
     np, pd = _imports()
     try:
@@ -473,11 +484,7 @@ def train(prepared_path: pathlib.Path, artifact_dir: pathlib.Path):
     train_months = months[:train_end]
     validation_months = months[train_end:validation_end]
     test_months = months[validation_end:]
-    splits = {
-        "train": data[data["observation_date"].isin(train_months)],
-        "validation": data[data["observation_date"].isin(validation_months)],
-        "test": data[data["observation_date"].isin(test_months)],
-    }
+    splits = purged_splits(data, train_months, validation_months, test_months)
     feature_columns = [column for column in data.columns if column not in NON_FEATURE_COLUMNS]
     for name, frame in splits.items():
         if frame.empty or frame[TARGET_NAME].nunique() < 2:
@@ -538,6 +545,8 @@ def train(prepared_path: pathlib.Path, artifact_dir: pathlib.Path):
         "target": TARGET_NAME,
         "target_definition": "New Class C HPD violation recorded in the next 90 days",
         "random_seed": RANDOM_SEED,
+        "label_horizon_days": 90,
+        "split_policy": "Purge rows whose 90-day labels cross the next split. Full-window cohort selection bias remains.",
         "feature_columns": feature_columns,
         "split": {
             name: {
@@ -668,7 +677,7 @@ These are preliminary results from an activity-stratified sample of buildings wi
 - Records and reporting practices can change over time, so drift monitoring is required.
 - The current probability is not calibrated for public display. The product should show source records and neutral follow-up language instead.
 """
-    path.write_text(text)
+    path.write_text(text + "\nEvaluation update: a 90-day target-window purge removes overlapping labels across train/validation/test boundaries. Cohort selection still uses full-window activity; this remains a preliminary within-cohort evaluation.\n")
 
 
 def main():
