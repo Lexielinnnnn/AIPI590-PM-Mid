@@ -6,6 +6,12 @@ The product supports due diligence and better viewing questions. It does not iss
 
 ## Midterm status
 
+### Stage-ready presentation and local pilot
+
+Open [`presentation.html`](presentation.html) locally in Chrome or Edge for the nine-slide presentation, saved evidence demo, downloadable viewing checklist, and embedded XGBoost inference. For real address lookup, run `python demo_server.py` and open `http://127.0.0.1:8766`. See [the run guide](STAGE_READY_README.md), [English speaker guide](docs/Presentation_Guide_EN.md), and [Chinese speaker guide](docs/演示指南_中文.md).
+
+The current evaluation artifacts are in `model_artifacts_validated/`. They use a 90-day label-window purge between chronological splits. The original `model_artifacts/` remain historical comparison artifacts. The offline demo does not call an LLM and does not provide a current property-safety prediction.
+
 Completed and verified:
 
 - Live 311 retrieval with pagination and before/after count checks.
@@ -17,7 +23,7 @@ Completed and verified:
 - A Responses API connector with a strict JSON schema and citation-ID validation.
 - A reproducible data-preparation and XGBoost training pipeline with a chronological test split.
 - A committed XGBoost model, feature schema, metrics, predictions, and model card.
-- Fifteen unit tests plus exact-hash offline replay validation.
+- Twenty unit tests, 25 offline output/citation contract checks, and browser/native model parity on 625 held-out cases (maximum probability difference about 2.49e-7). These are not external LLM quality measurements.
 
 Still unverified or incomplete:
 
@@ -95,7 +101,7 @@ python ml_pipeline.py all \
   --candidate-pool 1000
 ```
 
-The committed preliminary run contains 125 BBLs and 2,750 monthly observations. On the chronological test period, XGBoost reached 0.8987 PR-AUC, 0.8727 F1, and 0.1465 Brier score. The logistic baseline reached a higher 0.9163 PR-AUC and 0.9640 recall, so model selection remains open. See `docs/model_development_and_evaluation.md` and `model_artifacts/MODEL_CARD.md` for the full comparison and limitations.
+The prepared dataset contains 125 BBLs and 2,750 monthly observations. The updated label-window-purged split uses 1,375 training, 250 validation, and 625 test rows. XGBoost reaches 0.8988 average precision (reported as PR-AUC), 0.8555 F1, and 0.1485 Brier score. Logistic regression reaches 0.9175 average precision and 0.9712 recall, so model selection remains open. See `model_artifacts_validated/MODEL_CARD.md` and `model_artifacts_validated/metrics.json` for current results. The earlier, unpurged run is preserved in `model_artifacts/` for comparison; do not mix its metrics with the updated run.
 
 Score a precomputed feature object with the saved native XGBoost model:
 

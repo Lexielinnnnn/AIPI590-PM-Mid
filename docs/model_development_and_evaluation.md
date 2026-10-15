@@ -1,5 +1,21 @@
 # Model development and evaluation
 
+## Current evaluation update — October 15, 2026
+
+Use `model_artifacts_validated/` for the presentation and current evaluation. Training now removes rows whose 90-day outcome window crosses the validation boundary; validation similarly removes windows crossing the test boundary. The resulting splits are January–November 2024 (1,375 training rows), February–March 2025 (250 validation rows), and June–October 2025 (625 test rows).
+
+| Current test metric | XGBoost | Logistic regression |
+|---|---:|---:|
+| Average precision (reported as PR-AUC) | 0.8988 | 0.9175 |
+| Precision | 0.8322 | 0.7685 |
+| Recall | 0.8801 | 0.9712 |
+| F1 | 0.8555 | 0.8581 |
+| Brier score | 0.1485 | 0.1522 |
+
+There is no universal winner: logistic regression ranks cases better and has higher recall; XGBoost has higher precision and a lower Brier score. Full-window cohort selection and repeated tax lots remain limitations. This is not an unseen-building or citywide evaluation. See the new model card and `metrics.json` for complete results.
+
+The sections below describe the **historical, unpurged baseline** preserved in `model_artifacts/`. Their earlier row counts and metrics are not the current presentation results. Running the updated pipeline now applies the purge; use a separate artifacts directory to preserve historical outputs.
+
 ## Prediction task
 
 The supervised task estimates whether a BBL will receive at least one new Class C HPD violation during the 90 days after a monthly observation date. This target is measurable in the source data and narrower than an undefined property-safety score.
