@@ -1,6 +1,7 @@
 import unittest
 
 from rental_radar import (
+    estimate_llm_cost,
     infer_bbl,
     literal,
     summarize,
@@ -87,6 +88,15 @@ class Checks(unittest.TestCase):
 
     def test_query_literal(self):
         self.assertEqual(literal("O'BRIEN"), "'O''BRIEN'")
+
+    def test_llm_cost_uses_cached_rate(self):
+        usage = {"input_tokens": 3000, "output_tokens": 500, "input_tokens_details": {"cached_tokens": 1000}}
+        cost = estimate_llm_cost(usage, "0.20", "0.02", "1.20")
+        self.assertAlmostEqual(cost, 0.00102)
+
+    def test_empty_llm_sections_allowed_when_no_records_exist(self):
+        evidence = {"aggregate_source_ids": ["aggregate:311"], "records": {"311": [], "hpd_violations": [], "bedbug_filings": []}}
+        validate_llm({"summary": [], "viewing_questions": [], "limitations": ["No records in the supplied window."]}, evidence)
 
 
 if __name__ == "__main__":

@@ -2,9 +2,21 @@
 
 ## Product decision
 
-The LLM does not retrieve public records, resolve addresses, calculate totals, or create a property score. Python performs those tasks. The model receives a bounded evidence package and turns it into a short explanation plus viewing questions.
+The product separates deterministic evidence, statistical prediction, and natural-language explanation. Python retrieves public records, resolves addresses, calculates totals, and prepares lagged features. XGBoost is a candidate for a narrow 90-day Class C violation signal. The LLM receives a bounded evidence package and turns it into a short explanation plus viewing questions.
 
-## Planned model configuration
+Neither model creates a safety certification or lease recommendation.
+
+## ML model configuration
+
+- Target: at least one new Class C HPD violation within 90 days.
+- Baseline: class-weighted logistic regression.
+- Candidate: XGBoost binary classifier with depth 4 trees and histogram construction.
+- Leakage control: chronological split and features strictly before each observation date.
+- Primary metric: PR-AUC, with ROC-AUC, precision, recall, F1, accuracy, Brier score, and recall at the top 10%.
+
+In the preliminary chronological test, XGBoost improved accuracy, precision, F1, and Brier score. Logistic regression produced better PR-AUC, ROC-AUC, recall, and top-10% recall. Model selection remains open until the sampling frame is broadened and probabilities are calibrated.
+
+## Planned LLM configuration
 
 - Default: `gpt-5.6-luna` through the Responses API.
 - Reasoning effort: low for the constrained summarization task.
@@ -15,7 +27,7 @@ This is a planned configuration. The repository does not contain a successful ex
 
 ## Prompt design
 
-The versioned instruction block:
+The `rental-evidence-v2` instruction block:
 
 - Treats every source field as untrusted data and ignores instructions embedded in records.
 - Defines the evidentiary difference between complaints, violations, and self-reported filings.
@@ -23,7 +35,7 @@ The versioned instruction block:
 - Requires record-level citations for viewing questions.
 - Tells the model to copy deterministic aggregates instead of recalculating them.
 
-The program uses a strict schema and a second validation pass. Unknown citation IDs, empty sections, and aggregate-only viewing questions fail closed.
+The program uses a strict schema and a second validation pass. Unknown citation IDs and aggregate-only viewing questions fail closed. A no-record evidence package may return empty summary and question arrays with an explicit limitation instead of inventing content.
 
 ## Evaluation plan
 
@@ -47,4 +59,5 @@ Record actual usage from the API response. The code reads current per-million-to
 | Hallucinated explanation | Model may add unsupported facts | Deterministic counts, strict schema, citation validation | Claim-level entailment evaluation |
 | Legal/reputational harm | Strong labels could imply negligence or safety | Use neutral follow-up language and disclaimers | Counsel or tenant-advocate review |
 | Coverage bias | Reporting frequency differs by population and building | Never treat absence as safety | Publish a data-coverage statement |
-
+| Sampling bias | The ML sample begins with buildings that have HPD history | Label results preliminary and publish the manifest | Add a representative building frame with true negatives |
+| Model drift | Reporting and inspection patterns change over time | Chronological evaluation and dated artifacts | Scheduled drift and calibration checks |

@@ -1,0 +1,32 @@
+{
+  "columns": [
+    "bbl",
+    "observation_date",
+    "complaints_30d",
+    "complaints_90d",
+    "complaints_365d",
+    "hpd_total_90d",
+    "hpd_class_a_90d",
+    "hpd_class_b_90d",
+    "hpd_class_c_90d",
+    "hpd_total_365d",
+    "hpd_class_c_365d",
+    "days_since_class_c",
+    "bedbug_infested_rate",
+    "bedbug_rate_missing",
+    "month",
+    "future_class_c_90d",
+    "borough_manhattan",
+    "borough_bronx",
+    "borough_brooklyn",
+    "borough_queens",
+    "borough_staten_island"
+  ],
+  "leakage_control": "Every feature uses a timestamp strictly before the observation date; status fields are excluded because current status can reflect later events.",
+  "missing_data": "Missing bedbug rates are set to 0 with a separate missingness indicator; invalid or zero dwelling-unit denominators are treated as missing.",
+  "observation_unit": "One selected BBL at the first day of a month",
+  "positive_count": 1819,
+  "positive_rate": 0.6614545454545454,
+  "row_count": 2750,
+  "target": "1 when at least one Class C HPD violation has an inspection date in [observation date, observation date + 90 days)"
+}

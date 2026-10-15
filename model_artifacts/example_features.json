@@ -1,0 +1,20 @@
+{
+  "complaints_30d": 0,
+  "complaints_90d": 0,
+  "complaints_365d": 0,
+  "hpd_total_90d": 0,
+  "hpd_class_a_90d": 0,
+  "hpd_class_b_90d": 0,
+  "hpd_class_c_90d": 0,
+  "hpd_total_365d": 0,
+  "hpd_class_c_365d": 0,
+  "days_since_class_c": 730.0,
+  "bedbug_infested_rate": 0.0,
+  "bedbug_rate_missing": 1,
+  "month": 10,
+  "borough_manhattan": 0,
+  "borough_bronx": 0,
+  "borough_brooklyn": 0,
+  "borough_queens": 0,
+  "borough_staten_island": 1
+}

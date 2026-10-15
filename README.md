@@ -1,6 +1,6 @@
 # Rental Radar
 
-Rental Radar is an evidence-first NYC rental research prototype. A renter enters an address; the program retrieves public records, resolves a tax-lot identifier when the evidence supports one, computes all counts in Python, and produces a source-linked report plus a constrained input package for an optional LLM explanation.
+Rental Radar is an evidence-first NYC rental research prototype. A renter enters an address; the program retrieves public records, resolves a tax-lot identifier when the evidence supports one, computes all counts in Python, and produces a source-linked report. A separate ML pipeline predicts a narrow follow-up outcome, while an optional LLM turns bounded evidence into a cited explanation.
 
 The product supports due diligence and better viewing questions. It does not issue a safety score, certify current conditions, or recommend whether to sign a lease.
 
@@ -15,11 +15,14 @@ Completed and verified:
 - A responsive HTML evidence report for a short demo.
 - Offline snapshots for repeatable grading and development.
 - A Responses API connector with a strict JSON schema and citation-ID validation.
-- Nine unit tests plus exact-hash offline replay validation.
+- A reproducible data-preparation and XGBoost training pipeline with a chronological test split.
+- A committed XGBoost model, feature schema, metrics, predictions, and model card.
+- Fifteen unit tests plus exact-hash offline replay validation.
 
 Still unverified or incomplete:
 
 - The external LLM connector has not been run with project credentials, so model quality, latency, token usage, and actual cost remain unmeasured.
+- The preliminary ML sample begins with buildings that have HPD history; its metrics do not represent every NYC rental building.
 - A BBL can contain multiple addresses or buildings. The current join is a tax-lot join, not a confirmed building or entrance match.
 - No customer interviews are documented yet. The interview guide and evidence log are in `docs/customer_discovery.md`; do not claim interview findings until signed notes are added.
 - Multi-address comparison, authentication, deployment, accessibility testing, and mobile usability testing remain future work.
@@ -73,6 +76,37 @@ The BBL appears to cover a property complex, so the HPD and bedbug totals cannot
 6. Build Markdown, HTML, and a bounded evidence package with record-level source IDs.
 7. Optionally ask an LLM to summarize the package. Reject output with missing or unknown citation IDs.
 
+## Machine learning pipeline
+
+The ML target is whether a selected BBL receives a new Class C HPD violation within the next 90 days. Features include lagged 311 volume, recent HPD violations by class, severe-violation recency, the latest available bedbug rate, missingness, month, and borough.
+
+Install and run:
+
+```bash
+python -m pip install -r requirements-ml.txt
+
+python ml_pipeline.py all \
+  --data-dir data/ml \
+  --prepared data/prepared/model_dataset.csv \
+  --artifacts model_artifacts \
+  --start 2023-01-01 \
+  --end 2026-01-01 \
+  --per-borough 25 \
+  --candidate-pool 1000
+```
+
+The committed preliminary run contains 125 BBLs and 2,750 monthly observations. On the chronological test period, XGBoost reached 0.8987 PR-AUC, 0.8727 F1, and 0.1465 Brier score. The logistic baseline reached a higher 0.9163 PR-AUC and 0.9640 recall, so model selection remains open. See `docs/model_development_and_evaluation.md` and `model_artifacts/MODEL_CARD.md` for the full comparison and limitations.
+
+Score a precomputed feature object with the saved native XGBoost model:
+
+```bash
+python ml_pipeline.py predict \
+  --features model_artifacts/example_features.json \
+  --artifacts model_artifacts
+```
+
+The prediction command validates the exact feature schema and returns the probability, the validation-selected threshold, and the product boundary. It does not convert the probability into a safety claim.
+
 ## Output files
 
 - `raw_records.json`: retrieved source rows plus query URLs and count checks.
@@ -104,7 +138,7 @@ python rental_radar.py \
   --llm
 ```
 
-Guardrails include untrusted-data instructions, deterministic counts, strict structured output, record-level source IDs, rejection of invented citations, bounded evidence, and explicit interpretation limits. Citation existence is not factual entailment; a human must still compare generated claims with the source record.
+Guardrails include untrusted-data instructions, deterministic counts, strict structured output, record-level source IDs, rejection of invented citations, bounded evidence, and explicit interpretation limits. The model does not use web search or autonomously call city APIs. Citation existence is not factual entailment; a human must still compare generated claims with the source record. See `docs/llm_api_plan.md` for the prompting, evaluation, and token-economics plan.
 
 ## Evaluation
 
@@ -112,7 +146,14 @@ Guardrails include untrusted-data instructions, deterministic counts, strict str
 python -m unittest -v
 ```
 
-The current tests cover category scope, open-status handling, duplicate IDs, HPD class aggregation, bedbug filing supersession, BBL ambiguity, query escaping, and LLM citation rejection. `sample/validation.md` records the live and replay checks.
+The current tests cover category scope, open-status handling, duplicate IDs, HPD class aggregation, bedbug filing supersession, BBL ambiguity, query escaping, LLM citations and cost arithmetic, BBL validation, sampling, model threshold selection, and review-capacity recall. `sample/validation.md` records the live and replay checks.
+
+## Project documentation
+
+- `docs/data_collection_and_preparation.md`: collection, cleaning, missing data, bias, and leakage controls.
+- `docs/model_development_and_evaluation.md`: algorithms, split design, metrics, and preliminary results.
+- `docs/llm_api_plan.md`: API architecture, prompts, guardrails, evaluation, and token economics.
+- `model_artifacts/MODEL_CARD.md`: intended use, results, feature importance, and limitations.
 
 ## Source datasets
 
